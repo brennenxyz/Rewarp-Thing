@@ -1,15 +1,18 @@
 import { getFormattedChat } from "../ClientsideChat/index"
+import PogObject from "../PogData"
+
 
 let rewarping = false;
-let rewarpPos = []
 
+const data = new PogObject("Rewarper", { rewarpPos: [], type: "netherwart:1" })
 const fhPests = Java.type("com.jelly.farmhelperv2.feature.impl.PestsDestroyer")
+
 const rewarp = new Thread(() => {
     ChatLib.command("/ez-stopscript", true)
     ChatLib.command("warp garden")
     Thread.sleep(1500)
     if(!fhPests.getInstance().canEnableMacro(true)) {
-        ChatLib.command("ez-startscript netherwart:1", true)
+        ChatLib.command("ez-startscript " + data.type, true)
     } else {
         fhPests.getInstance().start()
     }
@@ -18,26 +21,29 @@ const rewarp = new Thread(() => {
 })
 
 register("command", () => {
-    rewarpPos = [ 
-        Math.floor(Player.getX()),
-        Math.floor(Player.getY()),
-        Math.floor(Player.getZ()),
-    ]
+    data.rewarpPos = [ Math.floor(Player.getX()), Math.floor(Player.getY()), Math.floor(Player.getZ()) ]
+    data.save()
 }).setName("rewarpset")
+
+register("command", (arg1) => {
+    data.type = arg1
+    data.save()
+}).setName("typeset")
 
 register("step", () => {
     let formattedChat = getFormattedChat(2);
 
     formattedChat.forEach((messageContent) => {
         if (messageContent.includes("§r[Pests Destroyer] Stopping!")) {
-            ChatLib.chat("restarting macro 0")
-            ChatLib.chat("restarting macro 1")
-            ChatLib.chat("restarting macro 2")
-            ChatLib.chat("restarting macro 3")
             fhPests.getInstance().stop()
+            ChatLib.chat("[Rewarper] Pests Destroyer Stopped...")
+            
             ChatLib.command("warp garden")
+            ChatLib.chat("[Rewarper] Rewarping...")
+
             setTimeout(() => {
-                ChatLib.command("ez-startscript netherwart:1", true)
+                ChatLib.command("ez-startscript " + data.type, true)
+                ChatLib.chat("[Rewarper] Starting Taunahi Script...")
             }, 1500);
         }
     })
