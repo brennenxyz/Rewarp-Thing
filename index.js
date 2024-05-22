@@ -48,7 +48,7 @@ register("step", () => {
         }
     })
 
-    if(Math.floor(Player.getX()) == rewarpPos[0] && Math.floor(Player.getY()) == rewarpPos[1] && Math.floor(Player.getZ()) == rewarpPos[2]) {
+    if(Math.floor(Player.getX()) == data.rewarpPos[0] && Math.floor(Player.getY()) == data.rewarpPos[1] && Math.floor(Player.getZ()) == data.rewarpPos[2]) {
         if(rewarping) return;
         rewarping = true;
         rewarp.start()
