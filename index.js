@@ -7,6 +7,8 @@ const mc = Client.getMinecraft()
 const data = new PogObject("Rewarper", { rewarpPos: [], type: "netherwart:1" })
 const fhPests = Java.type("com.jelly.farmhelperv2.feature.impl.PestsDestroyer")
 const shift = new KeyBind(mc.field_71474_y.field_74311_E);
+const display = Java.type("org.lwjgl.opengl.Display")
+const displayMode = Java.type("org.lwjgl.opengl.DisplayMode")
 
 const rewarp = new Thread(() => {
     Thread.sleep(1500)
