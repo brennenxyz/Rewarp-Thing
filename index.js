@@ -67,3 +67,8 @@ register("command", () => {
     display.setDisplayMode(new displayMode(50, 50))
     display.setResizable(true);
 }).setName("smallwindow")
+
+register("command", () => {
+    display.setDisplayMode(new displayMode(1280, 720))
+    display.setResizable(true);
+}).setName("stopwindow")
