@@ -6,7 +6,7 @@ Simple ChatTriggers script which enables FarmHelpers Pest Destroyer before rewar
 
 ## SmallWindow: Sets window size to 50x50 to minimize PC usage!
 - Run /smallwindow ingame to start
-- Run /stop to stop ofc
+- Run /stopwindow to make window big again
 
 ## Usage:
 - /rewarpset => Sets rewarp pos
